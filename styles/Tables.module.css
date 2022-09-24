@@ -1,11 +1,9 @@
 .maincontent{
-    color: white;
-    background-color: lightblue;
-    text-align: center;
+    color:  lightblue;
+    background-color: black;
+    
 }
 .tablesFormat input{
     width: 120px;
 }
-.element{
-    
-}
+

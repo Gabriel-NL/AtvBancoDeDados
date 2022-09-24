@@ -1,6 +1,7 @@
 import  styles  from  '../styles/Tables.module.css'
 import { Table } from '@mantine/core';
 
+
 function Tables() {
   return <div className={styles.maincontent}>
     <div className={styles.tablesFormat}>
@@ -8,6 +9,7 @@ function Tables() {
         <input type="text" placeholder='ID' />
         <input type="text" placeholder='Nome do tipo da despesa' />
         <input type="text" placeholder='Status (letra)' />  
+        
       </div>
       
     <div className={styles.tablesFormat}>
@@ -39,18 +41,9 @@ function Tables() {
         <input type="text" name="" placeholder='Data de vencimento' />
       </div>
 
-      <Table>
-      <thead>
-        <tr>
-          <th>Element position</th>
-          <th>Element name</th>
-          <th>Symbol</th>
-          <th>Atomic mass</th>
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </Table>  
       
+    
+
   </div>
 }
 
