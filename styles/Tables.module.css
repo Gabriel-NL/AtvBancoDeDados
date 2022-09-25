@@ -3,11 +3,13 @@
     background-color: black;
     
 }
-.maincontent input button{
+.maincontent input{
     background-color: black;
     width: 150px;
     text-align: center;
 }
 
-
+.maincontent button{
+    background-color: black;
+}
 

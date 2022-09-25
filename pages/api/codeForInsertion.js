@@ -1,3 +1,11 @@
+
+
+function collectData(button){
+    console.log("herroo")
+
+}
+export default collectData()
+
 function addToTipoDespesa(seq_tipo_despesa,nom_tipo_despesa,ind_status) {
 
     const sqlite3= require("sqlite3").verbose();

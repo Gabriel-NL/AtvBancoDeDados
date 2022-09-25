@@ -1,6 +1,7 @@
 import { Table } from "@mantine/core";
 import Demo from "../pages/api/tableMold"
 import  styles  from  '../styles/Tables.module.css'
+import collectData from '../pages/api/codeForInsertion'
 
 function MantineTable() {
     return  <div className={styles.maincontent}>
@@ -9,7 +10,7 @@ function MantineTable() {
         <input id="input11" type="text" placeholder='ID' />
         <input id="input12" type="text" placeholder='Nome do tipo da despesa' />
         <input id="input13" type="text" placeholder='Status (letra)' /> 
-        <button>Adicionar</button> 
+        <button onClick={()=> collectData} >Adicionar</button> 
     <Table>
       <thead> 
         <tr> 

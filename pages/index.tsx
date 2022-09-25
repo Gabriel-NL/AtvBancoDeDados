@@ -5,6 +5,7 @@ import Tables from '../components/first3tables'
 import MantineTable from '../components/mantineTabbles'
 import styles from '../styles/Home.module.css'
 
+
 const Home: NextPage = () => {
   return (
     <div className={styles.container}>
@@ -15,7 +16,7 @@ const Home: NextPage = () => {
       </Head>
       
       <MantineTable/>
-
+    <script src='./api/codeForInsertion'></script>
     </div>
   )
 }
