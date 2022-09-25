@@ -6,9 +6,10 @@ function MantineTable() {
     return  <div className={styles.maincontent}>
 
     <h1>Tabela do tipo da despesa</h1>
-        <input type="text" placeholder='ID' />
-        <input type="text" placeholder='Nome do tipo da despesa' />
-        <input type="text" placeholder='Status (letra)' />  
+        <input id="input11" type="text" placeholder='ID' />
+        <input id="input12" type="text" placeholder='Nome do tipo da despesa' />
+        <input id="input13" type="text" placeholder='Status (letra)' /> 
+        <button>Adicionar</button> 
     <Table>
       <thead> 
         <tr> 
