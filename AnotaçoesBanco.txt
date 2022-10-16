@@ -1,0 +1,41 @@
+Comandos:
+-SELECT: seleciona um ou mais alvos de uma tabela
+-WHERE: condição de pesquisa, e pra isso precisa colocar uma proposição logica
+-CREATE DATABASE: cria um banco de dados
+-CREATE TABLE: cria uma tabela dentro do banco de dados
+-INSERT INTO: insere um ou mais valores nos locais indicados
+-UPDATE: atualiza valores, modificando valores existentes.
+-DELETE: apaga valores, deletando valores existentes
+
+Parametros: 
+-*: afeta todos os campos de uma tabela
+
+-VARCHAR(X): define quantas letras essa variavel pode aceitar no máximo. Basta substituir X por um numero
+
+exemplos:
+-SELECT * FROM tabela
+-SELECT * FROM tabela WHERE index > 4;
+-SELECT coluna1 FROM tabela WHERE index > 4;
+-INSERT INTO tabela (coluna1) VALUES ('Gabriel lages');
+-INSERT INTO tabela (coluna1, coluna2) VALUES ('Gabriel lages', 'Endereco');
+-UPDATE tabela SET coluna1 'Gabriel lages' WHERE index = 8;
+-DELETE tabela SET coluna1 'Gabriel lages' WHERE index = 8;
+
+criação do banco:
+CREATE DATABASE banco_dos_dados;
+
+USE banco_dos_dados; 
+
+CREATE TABLE tabela(
+	ID_pra_usar_como_index INT,
+	variavel_de_texto VARCHAR(100),
+	valor_decimal DECIMAL (10,2)
+);
+
+INSERT INTO tabela(ID_pra_usar_como_index,variavel_de_texto,valor_decimal) 
+	VALUES
+	(1,'Gabriel', 100),
+	(2,'João', 50),
+	(3,'Rodrigo', 90);
+
+SELECT * FROM Tabela ORDER BY valor_decimal;
