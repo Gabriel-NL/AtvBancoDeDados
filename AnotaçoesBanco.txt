@@ -39,3 +39,209 @@ INSERT INTO tabela(ID_pra_usar_como_index,variavel_de_texto,valor_decimal)
 	(3,'Rodrigo', 90);
 
 SELECT * FROM Tabela ORDER BY valor_decimal;
+
+Definições:
+-family_members = tabela onde vão ocorrer as alterações.
+
+Comandos:
+
+SELECT * FROM family_members; 
+//Mostra a tabela inteira
+
+SELECT name, num_books_read FROM family_members; 
+//Mostra algumas das colunas.
+
+SELECT * FROM family_members WHERE species = 'human';
+SELECT * FROM family_members WHERE num_books_read > 0;
+SELECT * FROM family_members WHERE num_books_read >= 0;
+//Mostra apenas as linhas que atendem á condicional
+
+SELECT * FROM friends_of_pickles WHERE height_cm > 25 AND species = 'cat';
+SELECT * FROM friends_of_pickles WHERE height_cm > 25 OR species = 'cat';
+//Mostra apenas as linhas que atendem ás duas condicionais
+
+SELECT * FROM friends_of_pickles WHERE species IN ('cat', 'human');
+//Mostra apenas as linhas que contem espécies.
+
+SELECT DISTINCT gender, species FROM friends_of_pickles WHERE height_cm < 100;
+//Supondo que haja repetição de valores, Distinct filtra os resultados repetidos
+
+SELECT * FROM friends_of_pickles ORDER BY name;
+SELECT * FROM friends_of_pickles ORDER BY name DESC;
+//Ordena em ordem alfabetica ou numerica, depende dos valores inseridos.
+
+SELECT * FROM friends_of_pickles ORDER BY height_cm LIMIT 2;
+//Caso fosse fazer uma pesquisa, e desejasse apenas os primeiro valores que aparecessem, use este comando
+
+SELECT COUNT(*) FROM friends_of_pickles;
+//Retorna o numero de linhas da tabela
+
+SELECT COUNT(*) FROM friends_of_pickles WHERE species = 'human';
+//Retorna o numero de linhas que atendem á condicional da tabela.
+
+SELECT SUM(num_legs) FROM family_members;
+//Retorna a soma de todos os valores de uma coluna
+
+SELECT AVG(num_legs) FROM family_members;
+//Retorna a média de um valor
+
+SELECT MIN(num_legs) FROM family_members;
+SELECT MAX(num_books_read) FROM family_members;
+//retorna o valor minimo e o maximo
+
+SELECT COUNT(*), species FROM friends_of_pickles GROUP BY species;
+//Conta quantas linhas possuem o mesmo valor
+
+SELECT MAX(height_cm),species FROM friends_of_pickles GROUP BY species;
+//Retorna o maior valor de cada espécie, exibindo a altura e a espécie
+
+SELECT * FROM family_members WHERE num_books_read = (SELECT MAX(num_books_read) FROM family_members);
+//Quando você pesquisa algo, você faz uma busca. E há como você fazer uma busca em cima dos resultados da primeira busca em um unico comando.
+
+SELECT * FROM family_members WHERE favorite_book IS NOT NULL;
+
+SELECT * FROM family_members WHERE favorite_book IS NULL;
+//Retorna os valores que são ou não são nulos
+
+SELECT * FROM celebs_born WHERE birthdate > '1980-09-01';
+//Retorna os valores cuja data atende ás condições
+
+SELECT character.name, character_tv_show.tv_show_name
+FROM character
+INNER JOIN character_tv_show
+ON character.id = character_tv_show.character_id;
+
+SELECT character.name, character_actor.actor_name
+FROM character 
+INNER JOIN character_actor 
+ON character.id = character_actor.character_id;
+//Permite criar uma tabela relacional usando valores de mais de uma tabela, juntando valores usando IDs.
+
+SELECT character.name, tv_show.name
+FROM character
+INNER JOIN character_tv_show
+ON character.id = character_tv_show.character_id
+INNER JOIN tv_show
+ON character_tv_show.tv_show_id = tv_show.id;
+
+SELECT character.name, actor.name
+FROM character
+INNER JOIN character_actor
+ON character.id = character_actor.character_id
+INNER JOIN actor
+ON character_actor.actor_id = actor.id;
+//Se você achou que dava pra colocar apenas um INNER JOIN, achou errado. Há como colocar mais de um caso o seu conjunto de tabelas tenha mais de um ID
+
+SELECT character.name, tv_show.name
+FROM character
+INNER JOIN character_tv_show
+ON character.id = character_tv_show.character_id
+INNER JOIN tv_show
+ON character_tv_show.tv_show_id = tv_show.id 
+WHERE character.name != 'Barney Stinson' 
+AND tv_show.name != 'Buffy the Vampire Slayer';
+
+SELECT character.name, tv_show.name
+FROM character
+INNER JOIN character_tv_show
+ON character.id = character_tv_show.character_id
+INNER JOIN tv_show
+ON character_tv_show.tv_show_id = tv_show.id 
+WHERE character.name != 'Willow Rosenberg' 
+AND tv_show.name != 'How I Met Your Mother';
+//Sim, também há como colocar condicionais nos joins
+
+SELECT character.name, tv_show.name
+FROM character
+LEFT JOIN character_tv_show
+ON character.id = character_tv_show.character_id
+LEFT JOIN tv_show
+ON character_tv_show.tv_show_id = tv_show.id;
+
+SELECT character.name, actor.name
+FROM character
+LEFT JOIN character_actor
+ON character.id = character_actor.character_id
+LEFT JOIN actor
+ON character_actor.actor_id = actor.id;
+//Também há a opção de, caso não haja nenhum resultado nos joins, um "null" é retornado
+
+SELECT c.name, t.name
+FROM character AS c
+LEFT JOIN character_tv_show AS ct
+ON c.id = ct.character_id
+LEFT JOIN tv_show AS t
+ON ct.tv_show_id = t.id;
+
+SELECT c.name, a.name
+FROM character AS c
+LEFT JOIN character_actor AS ca
+ON c.id = ca.character_id
+LEFT JOIN actor AS a
+ON ca.actor_id = a.id;
+
+//Há como você dar um nome falso e mais simples para uma tabela se usar o AS *nomeNovo*
+
+SELECT character.name AS character, 
+tv_show.name AS name
+FROM character
+LEFT JOIN character_tv_show
+ON character.id = character_tv_show.character_id
+LEFT JOIN tv_show
+ON character_tv_show.tv_show_id = tv_show.id;
+
+SELECT character.name AS character, 
+actor.name AS actor
+FROM character
+LEFT JOIN character_actor
+ON character.id = character_actor.character_id
+LEFT JOIN actor
+ON character_actor.actor_id = actor.id;
+
+//Além de dar nome falso para a tabela, pode fazer isso para colunas de certas tabelas
+
+SELECT r1.name AS object, r2.name AS beats
+FROM rps AS r1
+INNER JOIN rps AS r2
+ON r1.defeats_id = r2.id;
+
+SELECT r1.name AS employee_name, r2.name AS boss_name
+FROM employees AS r1
+INNER JOIN employees AS r2
+ON r1.boss_id = r2.id;
+
+//Há até mesmo como você juntar os valores de uma tabela com uma cópia dela mesma
+SELECT * FROM robots WHERE name LIKE "%Robot%";
+SELECT * FROM robots WHERE name LIKE "SUPER _";
+SELECT * FROM robots WHERE name LIKE "SUPER%";
+SELECT * FROM robots WHERE name LIKE "%Robot 20__"
+
+//Se você usar o LIKE,e % em ambos os lados vai poder encontrar os resultados que possuem a palavra ou frase. Se colocar apenas na direita, apenas os que começam com sua palavra, e se colocar na esquerda é apenas os que terminam com a palavra
+
+SELECT *,
+CASE WHEN species = 'human' 
+THEN 2 
+ELSE 4 END 
+AS num_legs
+FROM friends_of_pickles;
+
+SELECT *,
+CASE WHEN species = 'dog' 
+THEN 'bark' 
+WHEN species= 'cat'
+THEN 'meow'
+ELSE 'talk' END 
+AS sound
+FROM friends_of_pickles;
+
+//Também há como criar uma coluna inteira cujos valores sejam definidos através de uma condicional
+
+SELECT * FROM robots WHERE SUBSTR(name, -4) LIKE '20__';
+SELECT * FROM robots WHERE SUBSTR(location, -2) LIKE 'NY';
+
+//E há como encontrar valores usando o a palavra que ele contem, numa posição especifica
+
+SELECT name, COALESCE(gun, sword) AS weapon FROM fighters;
+
+SELECT name, COALESCE(tank,gun, sword) AS weapon FROM fighters;
+//E, por ultimo, há como você escolher uma lista de colunas, e retornar o primeiro valor que não é nulo. Como por exemplo na tabela anterior, há 3 personagens, e cada um tem seu equipamento que pode ser uma arma, uma espada ou um tanque. No primeiro caso, se uma pessoa tem arma, vai exibir uma arma, se não tem, exibe sua espada, senão exibe nada. Semelhante se aplica áo segundo caso, com tanque
