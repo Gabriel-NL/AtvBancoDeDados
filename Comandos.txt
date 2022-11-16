@@ -1,41 +1,43 @@
-CREATE TABLE Usuario.acesso(
+CREATE TABLE acesso(
 	user_ID SERIAL,
 	login VARCHAR(100),
 	senha VARCHAR(100),
-	CONSTRAINT user_pk PRIMARY KEY (userID)
+	CONSTRAINT user_pk PRIMARY KEY (user_ID)
 );
 
-CREATE TABLE Usuario.informacoes(
+CREATE TABLE informacoes(
 	user_ID SERIAL,
 	nomeCompleto VARCHAR(100),
 	Email VARCHAR(100),
  	cargo VARCHAR(100),
   	setor VARCHAR(100),
-	CONSTRAINT user_FK FOREIGN KEY (user_ID) REFERENCES Usuario.acesso (user_ID) MATCH SIMPLE
+	CONSTRAINT user_FK FOREIGN KEY (user_ID) REFERENCES acesso (user_ID) MATCH SIMPLE,
+	CONSTRAINT nome_FK PRIMARY KEY (nomeCompleto) 
 );
 
-CREATE TABLE Usuario.tarefas(
+CREATE TABLE tarefas(
 	user_ID SERIAL,
 	nomeTarefa VARCHAR(100),
 	statusTarefa VARCHAR(3),
  	dataDeCriação DATE,
   	prazoFinal DATE,
   	criadoPor VARCHAR(100),
-	CONSTRAINT user_FK FOREIGN KEY (user_ID) REFERENCES Usuario.acesso (user_ID) MATCH SIMPLE,
-	CONSTRAINT nome_FK FOREIGN KEY (criadoPor) REFERENCES Usuario.informacoes (nomeCompleto) MATCH SIMPLE
+	CONSTRAINT user_FK FOREIGN KEY (user_ID) REFERENCES acesso (user_ID) MATCH SIMPLE,
+	CONSTRAINT nome_FK FOREIGN KEY (criadoPor) REFERENCES informacoes (nomeCompleto) MATCH SIMPLE
 );
 
-CREATE TABLE Usuario.relatorio(
+CREATE TABLE relatorio(
 	user_ID SERIAL,
 	ajudouNoSetor VARCHAR(100),
 	cargaHoraria TIME,
- 	comprovante FILE
+ 	comprovante_link VARCHAR(100)
 );
 
-CREATE TABLE Usuario.eficiencia(
+CREATE TABLE eficiencia(
   	user_id SERIAL,
 	totalTarefasConcluidas INT,
   	totalTarefasPendentes INT,
   	totalTarefasAtrasadas INT,
 	médiaEficiencia INT
 );
+ +
