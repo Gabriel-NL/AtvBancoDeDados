@@ -1,37 +1,41 @@
-CREATE TABLE DadosDeAcesso(
-	User_ID SERIAL,
-	Login VARCHAR(100),
-	Senha VARCHAR(100)
+CREATE TABLE Usuario.acesso(
+	user_ID SERIAL,
+	login VARCHAR(100),
+	senha VARCHAR(100),
+	CONSTRAINT user_pk PRIMARY KEY (userID)
 );
 
-CREATE TABLE DadosUsuario(
-	User_ID SERIAL,
-	NomeCompleto VARCHAR(100),
+CREATE TABLE Usuario.informacoes(
+	user_ID SERIAL,
+	nomeCompleto VARCHAR(100),
 	Email VARCHAR(100),
- 	Cargo VARCHAR(100),
-  	Setor VARCHAR(100)
+ 	cargo VARCHAR(100),
+  	setor VARCHAR(100),
+	CONSTRAINT user_FK FOREIGN KEY (user_ID) REFERENCES Usuario.acesso (user_ID) MATCH SIMPLE
 );
 
-CREATE TABLE Tarefas(
-	User_ID SERIAL,
-	NomeTarefa VARCHAR(100),
-	StatusTarefa VARCHAR(3),
- 	DataDeCriação DATE,
-  	PrazoFinal DATE,
-  	CriadoPor VARCHAR(100)
+CREATE TABLE Usuario.tarefas(
+	user_ID SERIAL,
+	nomeTarefa VARCHAR(100),
+	statusTarefa VARCHAR(3),
+ 	dataDeCriação DATE,
+  	prazoFinal DATE,
+  	criadoPor VARCHAR(100),
+	CONSTRAINT user_FK FOREIGN KEY (user_ID) REFERENCES Usuario.acesso (user_ID) MATCH SIMPLE,
+	CONSTRAINT nome_FK FOREIGN KEY (criadoPor) REFERENCES Usuario.informacoes (nomeCompleto) MATCH SIMPLE
 );
 
-CREATE TABLE Relatorio(
-	User_ID SERIAL,
-	AjudouNoSetor VARCHAR(100),
-	CargaHoraria TIME,
- 	Comprovante FILE
+CREATE TABLE Usuario.relatorio(
+	user_ID SERIAL,
+	ajudouNoSetor VARCHAR(100),
+	cargaHoraria TIME,
+ 	comprovante FILE
 );
 
-CREATE TABLE Eficiência(
+CREATE TABLE Usuario.eficiencia(
   	user_id SERIAL,
-	TotalTarefasConcluidas INT,
-  	TotalTarefasPendentes INT,
-  	TotalTarefasAtrasadas INT,
-	MédiaEficiencia INT
+	totalTarefasConcluidas INT,
+  	totalTarefasPendentes INT,
+  	totalTarefasAtrasadas INT,
+	médiaEficiencia INT
 );

@@ -7,6 +7,10 @@ Comandos:
 -UPDATE: atualiza valores, modificando valores existentes.
 -DELETE: apaga valores, deletando valores existentes
 
+-CONSTRAINT: Define se um valor será uma chave primária, ou secundaria.
+nota: Precisa usar o REFERENCES para funcionar.
+REFERENCES tabela1 (coluna) MATCH SIMPLE
+
 Parametros: 
 -*: afeta todos os campos de uma tabela
 
@@ -20,6 +24,8 @@ exemplos:
 -INSERT INTO tabela (coluna1, coluna2) VALUES ('Gabriel lages', 'Endereco');
 -UPDATE tabela SET coluna1 'Gabriel lages' WHERE index = 8;
 -DELETE tabela SET coluna1 'Gabriel lages' WHERE index = 8;
+-CONSTRAINT tabela PRIMARY KEY (ID_departamento)
+-CONSTRAINT tabela FOREIGN KEY (ID_departamento)
 
 criação do banco:
 CREATE DATABASE banco_dos_dados;
@@ -245,3 +251,13 @@ SELECT name, COALESCE(gun, sword) AS weapon FROM fighters;
 
 SELECT name, COALESCE(tank,gun, sword) AS weapon FROM fighters;
 //E, por ultimo, há como você escolher uma lista de colunas, e retornar o primeiro valor que não é nulo. Como por exemplo na tabela anterior, há 3 personagens, e cada um tem seu equipamento que pode ser uma arma, uma espada ou um tanque. No primeiro caso, se uma pessoa tem arma, vai exibir uma arma, se não tem, exibe sua espada, senão exibe nada. Semelhante se aplica áo segundo caso, com tanque
+
+
+
+
+
+References
+
+Restrições de integridade
+
+
