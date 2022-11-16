@@ -1,0 +1,37 @@
+CREATE TABLE DadosDeAcesso(
+	User_ID SERIAL,
+	Login VARCHAR(100),
+	Senha VARCHAR(100)
+);
+
+CREATE TABLE DadosUsuario(
+	User_ID SERIAL,
+	NomeCompleto VARCHAR(100),
+	Email VARCHAR(100),
+ 	Cargo VARCHAR(100),
+  	Setor VARCHAR(100)
+);
+
+CREATE TABLE Tarefas(
+	User_ID SERIAL,
+	NomeTarefa VARCHAR(100),
+	StatusTarefa VARCHAR(3),
+ 	DataDeCriação DATE,
+  	PrazoFinal DATE,
+  	CriadoPor VARCHAR(100)
+);
+
+CREATE TABLE Relatorio(
+	User_ID SERIAL,
+	AjudouNoSetor VARCHAR(100),
+	CargaHoraria TIME,
+ 	Comprovante FILE
+);
+
+CREATE TABLE Eficiência(
+  	user_id SERIAL,
+	TotalTarefasConcluidas INT,
+  	TotalTarefasPendentes INT,
+  	TotalTarefasAtrasadas INT,
+	MédiaEficiencia INT
+);
